@@ -130,9 +130,9 @@ export default function AdminDashboard() {
     }
 
     function handleLogout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        localStorage.removeItem("user");
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("role");
+        sessionStorage.removeItem("user");
         window.location.href = "/login";
     }
 
@@ -290,6 +290,7 @@ export default function AdminDashboard() {
                                     <div className="category-info">
                                         <h3>{cat.name}</h3>
                                         <p>{cat.description || "Tidak ada deskripsi"}</p>
+                                        <small className="category-owner">👤 {cat.createdBy?.name || "Unknown"}</small>
                                     </div>
                                     <button className="btn-delete" onClick={() => handleDeleteCategory(cat._id)}>🗑️</button>
                                 </div>

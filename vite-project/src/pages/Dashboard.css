@@ -238,11 +238,26 @@ body {
 
 .tasks-actions select {
     padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
-    color: #e4e4e7;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 500;
     cursor: pointer;
+    min-width: 150px;
+}
+
+.tasks-actions select:focus {
+    outline: none;
+    border-color: #818cf8;
+}
+
+.tasks-actions select option {
+    background: #1e1b4b;
+    color: #ffffff;
+    padding: 0.5rem;
+    font-size: 0.95rem;
 }
 
 .empty-state {

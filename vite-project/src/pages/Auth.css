@@ -143,6 +143,18 @@
     text-align: center;
 }
 
+/* Info Message */
+.auth-info {
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #93c5fd;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
 /* Form */
 .auth-form {
     display: flex;
