@@ -308,6 +308,13 @@
     margin: 0.25rem 0 0;
 }
 
+.category-owner {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.25rem;
+}
+
 .btn-delete {
     background: transparent;
     border: none;
@@ -478,15 +485,15 @@
     .admin-dashboard {
         padding: 1rem;
     }
-    
+
     .tab-content {
         padding: 1rem;
     }
-    
+
     .data-table {
         font-size: 0.85rem;
     }
-    
+
     .data-table th,
     .data-table td {
         padding: 0.5rem;

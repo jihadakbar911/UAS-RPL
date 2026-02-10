@@ -31,9 +31,9 @@ export default function Register() {
         try {
             const data = await register(name, username, password);
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("role", data.role);
-            localStorage.setItem("user", JSON.stringify(data.user));
+            sessionStorage.setItem("token", data.token);
+            sessionStorage.setItem("role", data.role);
+            sessionStorage.setItem("user", JSON.stringify(data.user));
 
             // Redirect to user dashboard
             navigate("/user");

@@ -4,19 +4,23 @@ import Register from "./pages/Register";
 import AdminHome from "./pages/AdminHome";
 import UserHome from "./pages/UserHome";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SessionWarning from "./components/SessionWarning";
 
 export default function App() {
     // Determine default redirect based on auth status
-    // Read from localStorage directly to get the latest values
+    // Read from sessionStorage directly to get the latest values
     function getDefaultRedirect() {
-        const token = localStorage.getItem("token");
-        const role = localStorage.getItem("role");
+        const token = sessionStorage.getItem("token");
+        const role = sessionStorage.getItem("role");
         if (!token) return "/login";
         return role === "ADMIN" ? "/admin" : "/user";
     }
 
     return (
         <BrowserRouter>
+            {/* Session Timeout Warning */}
+            <SessionWarning />
+
             <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<Login />} />

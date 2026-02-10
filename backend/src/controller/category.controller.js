@@ -1,9 +1,18 @@
 import Category from "../models/category.js";
 
-// GET semua kategori milik user
+// GET semua kategori (Admin: semua kategori, User: kategori milik sendiri)
 export async function getAllCategories(req, res) {
     try {
-        const categories = await Category.find({ createdBy: req.user.id }).sort({ name: 1 });
+        let filter = { createdBy: req.user.id };
+
+        // Admin dapat melihat semua kategori
+        if (req.user.role === "ADMIN") {
+            filter = {};
+        }
+
+        const categories = await Category.find(filter)
+            .populate("createdBy", "name username")
+            .sort({ name: 1 });
         res.json(categories);
     } catch (err) {
         console.error(err);

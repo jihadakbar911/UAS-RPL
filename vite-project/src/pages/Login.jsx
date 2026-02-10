@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { login } from "../api/auth";
 import "./Auth.css";
 
@@ -9,7 +9,9 @@ export default function Login() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const token = localStorage.getItem("token");
+    const [searchParams] = useSearchParams();
+    const [sessionExpired, setSessionExpired] = useState(false);
+    const token = sessionStorage.getItem("token");
 
     // CAPTCHA state
     const [captchaNum1, setCaptchaNum1] = useState(0);
@@ -27,7 +29,11 @@ export default function Login() {
 
     useEffect(() => {
         generateCaptcha();
-    }, [generateCaptcha]);
+        // Check if session expired
+        if (searchParams.get("expired") === "true") {
+            setSessionExpired(true);
+        }
+    }, [generateCaptcha, searchParams]);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -46,9 +52,9 @@ export default function Login() {
         try {
             const data = await login(username, password);
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("role", data.role);
-            localStorage.setItem("user", JSON.stringify(data.user));
+            sessionStorage.setItem("token", data.token);
+            sessionStorage.setItem("role", data.role);
+            sessionStorage.setItem("user", JSON.stringify(data.user));
 
             // Redirect based on role
             if (data.role === "ADMIN") {
@@ -78,6 +84,12 @@ export default function Login() {
                     <h1>Task Manager</h1>
                     <p>Kelola tugas Anda dengan mudah</p>
                 </div>
+
+                {sessionExpired && (
+                    <div className="auth-info">
+                        ⏰ Sesi Anda telah berakhir. Silakan login kembali.
+                    </div>
+                )}
 
                 {error && <div className="auth-error">{error}</div>}
 

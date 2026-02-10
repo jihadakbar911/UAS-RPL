@@ -7,10 +7,15 @@ import adminRoutes from "./routes/admin.routes.js";
 
 const app = express();
 
-app.use(cors({
+// CORS configuration for Railway deployment
+const corsOptions = {
     origin: process.env.FRONTEND_URL || "*",
     credentials: true,
-}));
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/api/health", (req, res) => {
