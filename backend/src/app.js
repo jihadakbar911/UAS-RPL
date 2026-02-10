@@ -9,7 +9,7 @@ const app = express();
 
 // CORS configuration for Railway deployment
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || "*",
+    origin: process.env.FRONTEND_URL || "https://project-frontend.up.railway.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
